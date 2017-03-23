@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>名稱</th>
+        <th>Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr>
+            <td><%= @topic.name %></td>
+            <td><%= @topic.user.email %></td>
+          </tr>
+    </tbody>
+  </table>
+  <br>
+  <div class="text-center">
+  <%= link_to "回上一頁",groups_path, class: "btn btn-primary" %>
+
+  </div>
+
+</div>

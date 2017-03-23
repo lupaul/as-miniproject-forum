@@ -1,0 +1,21 @@
+<div class="row text-center">
+<%= link_to("Create",new_group_path,class:"btn btn-warning ") %>
+<br><br><br>
+</div>
+<div class="row">
+  <% @groups.each do |group| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption text-center">
+        <h3><%= link_to group.name,group_path(group) %></h3>
+        <br>
+        <p>群組創建時間：</p>
+        <p> <%= group.date %></p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+
+</div>
