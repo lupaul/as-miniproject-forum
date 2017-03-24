@@ -23,6 +23,17 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @comments = @topic.comments
+    
+    @comment = @topic.comments.new()
+  end
+
+  def comment
+    @topic = Topic.find(params[:id])
+    @comment = @topic.comments.new(comment_params)
+    if @comment.save
+      redirect_to topic_path(@topic)
+    end
   end
 
   def edit
@@ -50,6 +61,10 @@ class TopicsController < ApplicationController
   end
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
   def topic_params
     params.require(:topic).permit(:name, :date, :description)

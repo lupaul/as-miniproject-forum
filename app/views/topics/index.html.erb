@@ -11,14 +11,12 @@
         <br>
 
         <p>
-        <%= link_to("點選",topic_path(topic), class: "btn btn-primary") %>
+        <%= link_to("Show",topic_path(topic), class: "btn btn-primary") %>
         <%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %>
-        <%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %>  
+        <%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %>
         </p>
       </div>
     </div>
   </div>
   <% end %>
-
-
 </div>

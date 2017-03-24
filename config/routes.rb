@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root "topics#index"
 
   resources :groups
-  resources :topics
+  resources :topics do
+    member do
+      post :comment
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
