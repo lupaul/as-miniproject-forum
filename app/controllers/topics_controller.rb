@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
     elsif params[:category]
       @topics = Category.find_by(title: params[:category]).members.order("created_at DESC")
     else
-      @topics = Topic.all
+      @topics = Topic.paginate(page: params[:page], per_page: 5)
     end
 
 
