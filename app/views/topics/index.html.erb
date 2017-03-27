@@ -1,4 +1,9 @@
 <div class="row text-center">
+<h3>選擇分類：</h3>
+<%= simple_form_for topics_path, method: :get do %>
+<%= select_tag "category", options_from_collection_for_select(Category.all, "title", "title", params[:category]), onchange: 'this.form.submit()', prompt: "請選擇" %>
+ <% end %> <br><br>
+
 <%= link_to("文章名稱排序",topics_path(new: :name),class: 'btn btn-success') %>
 <%= link_to("文章ＩＤ排序", topics_path(new: :id), class: "btn btn-success") %>
 <%= link_to("(最新文章)排序",topics_path(new: :time),class: 'btn btn-success') %>
@@ -7,6 +12,48 @@
 <%= link_to("Create",new_topic_path,class:"btn btn-warning ") %>
 <br><br><br>
 </div>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>分類</th>
+        <th>Topic名稱</th>
+        <th>Creator</th>
+        <th>Topic發表時間</th>
+        <th>Comment數量</th>
+        <th>最後comment時間</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @topics.each do |topic| %>
+          <tr>
+            <td>#</td>
+            <td><% topic.categories.each do |catgory| %>
+              <button> <%= catgory.title %> </button>
+              <% end %>
+            </td>
+            <td><%= link_to topic.name,topic_path(topic) %></td>
+            <td><%= topic.user.email %></td>
+            <td><%= topic.created_at  %></td>
+            <td><%= topic.comments_count %></td>
+            <td><%= topic.last_time %></td>
+            <% if current_user && current_user == topic.user %>
+              <td><%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %></td>
+              <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %></td>
+            <% end %>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+
 <div class="row">
   <% @topics.each do |topic| %>
   <div class="col-sm-6 col-md-4">
@@ -25,7 +72,6 @@
       <div class="caption text-center">
         <h3><%= link_to topic.name,topic_path(topic) %></h3>
         <br>
-
         <p>
         <%= link_to("Show",topic_path(topic), class: "btn btn-primary") %>
         <%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %>

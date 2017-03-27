@@ -3,8 +3,8 @@ class TopicsController < ApplicationController
 
   def index
     if params[:new] == "time"
-      # @topics = Topic.order("created_at DESC")
-      @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
+      @topics = Topic.order("created_at DESC")
+      # @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
     elsif params[:new]
       sort_by = (params[:new] == "name") ? "name" : "id"
       @topics = Topic.order(sort_by)
@@ -12,6 +12,8 @@ class TopicsController < ApplicationController
       @topics = Topic.order("last_time DESC")
     elsif params[:max] == "count"
       @topics = Topic.order("comments_count DESC")
+    elsif params[:category]
+      @topics = Category.find_by(title: params[:category]).members.order("created_at DESC")
     else
       @topics = Topic.all
     end
