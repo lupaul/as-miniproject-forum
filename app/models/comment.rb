@@ -1,3 +1,4 @@
 class Comment < ActiveRecord::Base
-  belongs_to :topic
+  validates :content, presence: true
+  belongs_to :topic, counter_cache: :comments_count
 end

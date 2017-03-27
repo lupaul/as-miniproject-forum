@@ -1,4 +1,9 @@
 <div class="row text-center">
+<%= link_to("文章名稱排序",topics_path(new: :name),class: 'btn btn-success') %>
+<%= link_to("文章ＩＤ排序", topics_path(new: :id), class: "btn btn-success") %>
+<%= link_to("(最新文章)排序",topics_path(new: :time),class: 'btn btn-success') %>
+<%= link_to("最後回覆時間排序",topics_path(last: :time),class: 'btn btn-success') %>
+<%= link_to("最多回覆數排序",topics_path(max: :count), class: "btn btn-info") %>
 <%= link_to("Create",new_topic_path,class:"btn btn-warning ") %>
 <br><br><br>
 </div>
@@ -6,6 +11,12 @@
   <% @topics.each do |topic| %>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
+      <div class="text-left">
+        <h4>最後回覆時間：<%= topic.last_time %></h4>
+      </div>
+      <div class="text-right">
+        <h4>回覆數：<%= topic.comments.count %></h4>
+      </div>
       <div class="caption text-center">
         <h3><%= link_to topic.name,topic_path(topic) %></h3>
         <br>

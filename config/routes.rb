@@ -2,8 +2,19 @@ Rails.application.routes.draw do
   devise_for :users
   root "topics#index"
 
+
+    resources :users do
+      collection do
+        get :profile
+      end
+    end
+
   resources :groups
   resources :topics do
+    collection do
+      get :last_time
+      get :comment_count
+    end
     member do
       post :comment
     end

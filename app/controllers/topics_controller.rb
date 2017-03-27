@@ -2,7 +2,19 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @topics = Topic.all
+    if params[:new] == "time"
+      # @topics = Topic.order("created_at DESC")
+      @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
+    elsif params[:new]
+      sort_by = (params[:new] == "name") ? "name" : "id"
+      @topics = Topic.order(sort_by)
+    elsif params[:last] == "time"
+      @topics = Topic.order("last_time DESC")
+    elsif params[:max] == "count"
+      @topics = Topic.order("comments_count DESC")
+    else
+      @topics = Topic.all
+    end
   end
 
   def new
@@ -24,16 +36,19 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @comments = @topic.comments
-    
     @comment = @topic.comments.new()
   end
 
   def comment
     @topic = Topic.find(params[:id])
     @comment = @topic.comments.new(comment_params)
+
     if @comment.save
+      @topic.last_time = @comment.created_at
+      @topic.save
       redirect_to topic_path(@topic)
     end
+
   end
 
   def edit
@@ -60,6 +75,7 @@ class TopicsController < ApplicationController
 
   end
 
+
   private
 
   def comment_params
@@ -69,5 +85,4 @@ class TopicsController < ApplicationController
   def topic_params
     params.require(:topic).permit(:name, :date, :description)
   end
-
 end
