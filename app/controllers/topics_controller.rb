@@ -15,6 +15,8 @@ class TopicsController < ApplicationController
     else
       @topics = Topic.all
     end
+
+
   end
 
   def new
@@ -83,6 +85,6 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :date, :description)
+    params.require(:topic).permit(:name, :date, :description, category_ids: [])
   end
 end
