@@ -3,17 +3,17 @@ class TopicsController < ApplicationController
 
   def index
     if params[:new] == "time"
-      @topics = Topic.order("created_at DESC")
+      @topics = Topic.order("created_at DESC").paginate(page: params[:page], per_page: 5)
       # @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
     elsif params[:new]
       sort_by = (params[:new] == "name") ? "name" : "id"
-      @topics = Topic.order(sort_by)
+      @topics = Topic.order(sort_by).paginate(page: params[:page], per_page: 5)
     elsif params[:last] == "time"
-      @topics = Topic.order("last_time DESC")
+      @topics = Topic.order("last_time DESC").paginate(page: params[:page], per_page: 5)
     elsif params[:max] == "count"
-      @topics = Topic.order("comments_count DESC")
+      @topics = Topic.order("comments_count DESC").paginate(page: params[:page], per_page: 5)
     elsif params[:category]
-      @topics = Category.find_by(title: params[:category]).members.order("created_at DESC")
+      @topics = Category.find_by(title: params[:category]).members.order("created_at DESC").paginate(page: params[:page], per_page: 5)
     else
       @topics = Topic.paginate(page: params[:page], per_page: 5)
     end
@@ -46,6 +46,8 @@ class TopicsController < ApplicationController
   def comment
     @topic = Topic.find(params[:id])
     @comment = @topic.comments.new(comment_params)
+    @comment.user = current_user
+
 
     if @comment.save
       @topic.last_time = @comment.created_at
@@ -71,11 +73,21 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
-    if @topic.destroy
-      redirect_to topics_path
-    else
-      render :index
+    @topic.destroy
+    respond_to do |format|
+      #:remote => true
+      format.html
+      format.js #destroy.js.erb
+      # format.js { render text: "alert('you!')" }
     end
+    # if @topic.destroy
+    #   redirect_to topics_path
+    # else
+    #   render :index
+    # end
+  end
+
+  def about
 
   end
 

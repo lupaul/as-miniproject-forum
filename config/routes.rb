@@ -6,18 +6,24 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         get :profile
+        put :edit_profile
+        get :post_topics
+        get :post_comments
       end
     end
 
-  resources :groups
+
   resources :topics do
     collection do
+      get :about
       get :last_time
       get :comment_count
     end
+
     member do
       post :comment
     end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

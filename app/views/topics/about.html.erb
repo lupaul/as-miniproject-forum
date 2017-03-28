@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="text-center">
+      <h1 >本站介紹</h1><br>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption text-center">
+          <h3>全站使用人數：</h3>
+          <br>
+          <h3><%= User.count %> 人</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption text-center">
+          <h3>全站主題數：</h3>
+          <br>
+          <h3><%=Topic.count %>篇</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption text-center">
+          <h3>全站回覆數：</h3>
+          <br>
+          <h3><%= Comment.count %>則</h3>
+        </div>
+      </div>
+    </div>
+</div>
