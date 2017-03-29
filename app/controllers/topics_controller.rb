@@ -94,6 +94,26 @@ class TopicsController < ApplicationController
 
   end
 
+  def like
+    @topic = Topic.find(params[:id])
+    # byebug
+    unless @topic.is_like_by(current_user)
+      Like.create(topic: @topic, user: current_user)
+      byebug
+      redirect_to topics_path(page: params[:page])
+      # redirect_to :back
+    end
+  end
+
+  def unlike
+    @topic = Topic.find(params[:id])
+    like = @topic.find_like(current_user)
+    byebug
+    like.destroy
+    redirect_to :back
+
+  end
+
 
   private
 
