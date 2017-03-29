@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
       @profile = current_user.build_profile(content_params)
       @profile.save
-    
+
     redirect_to profile_users_path
     # byebug
     # @profie.save
@@ -27,6 +27,10 @@ class UsersController < ApplicationController
 
   def post_comments
     @comments = current_user.comments
+  end
+
+  def like_topics
+    @topics = current_user.liked_topics
   end
 
   private

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         put :edit_profile
         get :post_topics
         get :post_comments
+        get :like_topics
       end
     end
 
