@@ -9,7 +9,7 @@
       <tbody>
         <% @comments.each do |comment| %>
             <tr>
-              <td><%= comment.content %></td>
+              <td><%= link_to comment.content, topic_path(comment.topic_id) %></td>
             </tr>
         <% end %>
       </tbody>
