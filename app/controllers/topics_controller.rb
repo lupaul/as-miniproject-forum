@@ -2,19 +2,21 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    category = Category.find_by(title: params[:category]) if params[:category]
+
     if params[:new] == "time"
       @topics = Topic.order("created_at DESC").paginate(page: params[:page], per_page: 5)
       # @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
     elsif params[:new]
       sort_by = (params[:new] == "name") ? "name" : "id"
-      
+
       @topics = Topic.order(sort_by).paginate(page: params[:page], per_page: 5)
     elsif params[:last] == "time"
       @topics = Topic.order("last_time DESC").paginate(page: params[:page], per_page: 5)
     elsif params[:max] == "count"
       @topics = Topic.order("comments_count DESC").paginate(page: params[:page], per_page: 5)
-    elsif params[:category]
-      @topics = Category.find_by(title: params[:category]).members.order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    elsif category
+      @topics = category.members.order("created_at DESC").paginate(page: params[:page], per_page: 5)
     else
       @topics = Topic.paginate(page: params[:page], per_page: 5)
     end

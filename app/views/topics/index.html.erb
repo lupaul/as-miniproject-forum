@@ -23,6 +23,7 @@
         <th>Creator</th>
         <th>Topic發表時間</th>
         <th>Comment數量</th>
+        <th>Who likes</th>
         <th>最後comment時間</th>
 
       </tr>
@@ -41,6 +42,7 @@
               <td><%= topic.user.email %></td>
               <td><%= topic.created_at  %></td>
               <td><%= topic.comments_count %></td>
+              <td> ex</td>
               <td><%= topic.last_time %></td>
               <% if current_user && current_user == topic.user %>
                 <td><%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %></td>
