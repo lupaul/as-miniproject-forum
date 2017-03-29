@@ -35,7 +35,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'simple_form'
 gem 'will_paginate'
-gem 'omniauth-facebook','~> 4.0.0'
+gem 'omniauth-facebook'
 
 gem 'settingslogic'
 
