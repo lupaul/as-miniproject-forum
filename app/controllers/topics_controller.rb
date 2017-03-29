@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
       # @topics =Topic.includes(:comments).select('id','name','created_at','last_time').order("created_at DESC")
     elsif params[:new]
       sort_by = (params[:new] == "name") ? "name" : "id"
+      
       @topics = Topic.order(sort_by).paginate(page: params[:page], per_page: 5)
     elsif params[:last] == "time"
       @topics = Topic.order("last_time DESC").paginate(page: params[:page], per_page: 5)
