@@ -9,7 +9,7 @@
     <td><%= topic.created_at  %></td>
     <td><%= topic.comments_count %></td>
     <td><%= topic.last_time %></td>
-    <td> count</td>
+    <td id="topic-like-count-<%= topic.id %>"><%= topic.liked_users.count %></td>
 
     <td id="topic-like-<%= topic.id %>">
       <%= render partial: "like", locals: {topic: topic} %>
