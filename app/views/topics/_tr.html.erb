@@ -1,0 +1,25 @@
+<tr id="topic-<%= topic.id %>">
+  <td >#</td>
+    <td><% topic.categories.each do |catgory| %>
+      <button> <%= catgory.title %> </button>
+      <% end %>
+    </td>
+    <td><%= link_to topic.name,topic_path(topic) %></td>
+    <td><%= topic.user.email %></td>
+    <td><%= topic.created_at  %></td>
+    <td><%= topic.comments_count %></td>
+    <td><%= topic.last_time %></td>
+    <td> count</td>
+
+    <td id="topic-like-<%= topic.id %>">
+      <%= render partial: "like", locals: {topic: topic} %>
+    </td>
+    <td id="topic-like-btn-<%= topic.id %>">
+      <%= render partial: "likebutton", locals: {topic: topic} %>
+    </td>
+    <% if current_user && current_user == topic.user %>
+      <td><%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %></td>
+      <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning",remote: true) %></td>
+      <!-- <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %></td> -->
+    <% end %>
+</tr>

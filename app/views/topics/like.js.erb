@@ -1,0 +1,8 @@
+str = "<%=j render partial: "like", locals: {topic: @topic} %>"
+btn = "<%=j render partial: "likebutton", locals: {topic: @topic} %>"
+
+
+$("#topic-like-<%= @topic.id %>").html(str);
+$("#topic-like-btn-<%= @topic.id %>").html(btn);
+
+$("#topic-like-count-<%= @topic.id %>").text(<%= @topic.liked_users.count %>);

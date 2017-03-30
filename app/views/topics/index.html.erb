@@ -23,41 +23,16 @@
         <th>Creator</th>
         <th>Topic發表時間</th>
         <th>Comment數量</th>
-        <th>Who likes</th>
         <th>最後comment時間</th>
-        <th>讚按鈕</th>
+        <th>按讚人數</th>
+        <th>Who likes</th>
+        <th>讚鈕</th>
 
       </tr>
     </thead>
     <tbody>
-
       <% @topics.each do |topic| %>
-
-          <tr id="topic-<%= topic.id %>">
-            <td >#</td>
-              <td><% topic.categories.each do |catgory| %>
-                <button> <%= catgory.title %> </button>
-                <% end %>
-              </td>
-              <td><%= link_to topic.name,topic_path(topic) %></td>
-              <td><%= topic.user.email %></td>
-              <td><%= topic.created_at  %></td>
-              <td><%= topic.comments_count %></td>
-              <td><% topic.liked_users.each do |user| %>
-                <%= user.dispaly_name %>
-              <% end %></td>
-              <td><%= topic.last_time %></td>
-              <% if current_user && topic.is_like_by(current_user) %>
-                <td><%= link_to "-1", unlike_topic_path(topic, page: params[:page]), :method => :post, :class => "btn btn-primary", :remote => true %></td>
-              <% else %>
-                 <td><%= link_to "+1", like_topic_path(topic, page: params[:page]), :method => :post, :class => "btn btn-success" %></td>
-              <% end %>
-              <% if current_user && current_user == topic.user %>
-                <td><%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %></td>
-                <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning",remote: true) %></td>
-                <!-- <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %></td> -->
-              <% end %>
-          </tr>
+        <%= render partial: "tr", locals: {topic: topic} %>
       <% end %>
     </tbody>
   </table>

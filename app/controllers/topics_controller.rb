@@ -99,18 +99,28 @@ class TopicsController < ApplicationController
     # byebug
     unless @topic.is_like_by(current_user)
       Like.create(topic: @topic, user: current_user)
-      
-      redirect_to topics_path(page: params[:page])
+
+      # redirect_to topics_path(page: params[:page])
       # redirect_to :back
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :back}
+      format.js
     end
   end
 
   def unlike
     @topic = Topic.find(params[:id])
     like = @topic.find_like(current_user)
-
     like.destroy
-    redirect_to :back
+    # redirect_to :back
+
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js { render "like"} #like.js.erb
+      # format.json { render json: @resource }
+    end
 
   end
 
