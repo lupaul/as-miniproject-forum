@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :like
       post :unlike
       post :comment
+      post :del_comment
     end
 
   end

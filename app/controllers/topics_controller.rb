@@ -44,19 +44,49 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @comments = @topic.comments
-    @comment = @topic.comments.new
-    @photo = @comment.build_photo
+    if params[:comment_id]
+      @comment = Comment.find(params[:comment_id])
+      if @comment.photo.present?
+        @photo = @comment.photo
+      else
+        @photo = @comment.build_photo
+      end
+    else
+      @comment = @topic.comments.new
+      @photo = @comment.build_photo
+    end
+
+
   end
 
   def comment
-    @topic = Topic.find(params[:id])
-    @comment = @topic.comments.new(comment_params)
-    @comment.user = current_user
-
-    if @comment.save
-      @topic.last_time = @comment.created_at
-      @topic.save
+    if params[:comment_id]
+      @topic = Topic.find(params[:id])
+      @comment = Comment.find(params[:comment_id])
+      @comment.update(comment_params)
       redirect_to topic_path(@topic)
+    else
+      @topic = Topic.find(params[:id])
+      @comment = @topic.comments.new(comment_params)
+      @comment.user = current_user
+      if @comment.save
+        @topic.last_time = @comment.created_at
+        @topic.save
+        redirect_to topic_path(@topic)
+      end
+    end
+
+  end
+
+  def del_comment
+    @topic = Topic.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
+    if current_user == @comment.user
+      @comment.destroy
+      redirect_to topic_path(@topic)
+    else
+      flash[:warning] = "U don't have permission"
+      render :show
     end
 
   end

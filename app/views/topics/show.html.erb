@@ -48,19 +48,29 @@
               <%= comment.user.email %>
             <% end %>
           </td>
+          <td>
+            <% if current_user && current_user == comment.user %>
+              <%= link_to("Edit",topic_path(comment_id: comment),class:"btn btn-info") %>
+              <%= link_to("Delete",del_comment_topic_path(comment_id: comment),method: :post, class: "btn btn-warning") %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-          <%= simple_form_for @comment, url: comment_topic_path do |f| %>
-            <div class="form-group">
-              <%= f.input :content , placeholder: '回覆評論',input_html:{class: "form-control"} %>
-              <%= f.simple_fields_for :photo do |c| %>
-                <%= c.input :image,label: '回覆上傳照片', as: :file %>
-              <% end %>
-            </div>
-            <%= f.submit "發表評論", class: "btn btn-primary", data: {disable_with: "Submitting....."} %>
-          <% end %>
+  <%= simple_form_for @comment, url: comment_topic_path(comment_id: @comment),method: :post do |f| %>
+    <div class="form-group">
+      <%= f.input :content , placeholder: '回覆評論',input_html:{class: "form-control"} %>
+    <% if @photo.image.present? %>
+      <%= image_tag(@photo.image.thumb.url, class: "thumbnail") %>
+    <% else %>
+      <%= f.simple_fields_for :photo do |c| %>
+        <%= c.input :image,label: '回覆上傳照片', as: :file %>
+      <% end %>
+    <% end %>
+    </div>
+    <%= f.submit "發表評論", class: "btn btn-primary", data: {disable_with: "Submitting....."} %>
+  <% end %>
 
 
 </div>

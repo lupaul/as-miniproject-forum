@@ -5,7 +5,7 @@ class Topic < ActiveRecord::Base
   has_many :liked_users, through: :likes, source: :user
   has_many :topic_categoryships
   has_many :categories, through: :topic_categoryships
-  has_one :photo
+  has_one :photo, dependent: :destroy
   accepts_nested_attributes_for :photo
   # has_one :topicphoto
   # accepts_nested_attributes_for :topicphoto

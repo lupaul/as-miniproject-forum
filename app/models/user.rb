@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   has_many :groups
-  has_many :topics
+  has_many :topics, dependent: :destroy
   has_one :profile
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_topics, through: :likes, source: :topic
   has_many :photos
