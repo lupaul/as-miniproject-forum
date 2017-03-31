@@ -11,7 +11,7 @@
           <tr>
             <td><%= @topic.name %></td>
             <td><% if @topic.photo.present? %>
-              <%= image_tag(@topic.photo.image.thumb.url,class:"thumbnail") %>
+              <%= image_tag(@topic.photo.image.medium.url,class:"thumbnail") %>
             <% else %>
               <%= image_tag("http://placehold.it/100x100&text=No Pic", class:"thumbnail") %>
             <% end %>
