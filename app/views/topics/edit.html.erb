@@ -2,6 +2,13 @@
   <div class="form-group">
     <%= f.input :name , input_html:{class: "form-control"} %>
     <%= f.association :categories,   as: :check_boxes %>
+    <% if @photo.image.present? %>
+      <%= image_tag(@photo.image.thumb.url) %>
+    <% else %>
+      <%= f.simple_fields_for :photo do |c| %>
+        <%= c.input "上傳照片", as: :file %>
+      <% end %>
+    <% end %>
   </div>
   <%= f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submitting....."} %>
 <% end %>

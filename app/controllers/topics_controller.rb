@@ -26,6 +26,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @photo = @topic.build_photo
   end
 
   def create
@@ -43,14 +44,14 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @comments = @topic.comments
-    @comment = @topic.comments.new()
+    @comment = @topic.comments.new
+    @photo = @comment.build_photo
   end
 
   def comment
     @topic = Topic.find(params[:id])
     @comment = @topic.comments.new(comment_params)
     @comment.user = current_user
-
 
     if @comment.save
       @topic.last_time = @comment.created_at
@@ -62,6 +63,12 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+
+    if @topic.photo.present?
+      @photo = @topic.photo
+    else
+      @photo = @topic.build_photo
+    end
   end
 
   def update
@@ -128,10 +135,10 @@ class TopicsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, photo_attributes: [:image, :id])
   end
 
   def topic_params
-    params.require(:topic).permit(:name, :date, :description, category_ids: [])
+    params.require(:topic).permit(:name, :date, :description, category_ids: [], photo_attributes: [:id, :image])
   end
 end

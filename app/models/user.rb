@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :likes, dependent: :destroy
   has_many :liked_topics, through: :likes, source: :topic
+  has_many :photos
 
   def dispaly_name
     email.split("@").first

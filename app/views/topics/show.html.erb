@@ -3,40 +3,66 @@
     <thead>
       <tr>
         <th>名稱</th>
+        <th>Photo</th>
         <th>Creator</th>
       </tr>
     </thead>
     <tbody>
           <tr>
             <td><%= @topic.name %></td>
+            <td><% if @topic.photo.present? %>
+              <%= image_tag(@topic.photo.image.thumb.url,class:"thumbnail") %>
+            <% else %>
+              <%= image_tag("http://placehold.it/100x100&text=No Pic", class:"thumbnail") %>
+            <% end %>
+            </td>
             <td><%= @topic.user.email %></td>
           </tr>
     </tbody>
   </table>
 </div>
-<div class="container text-center" >
-  <div  style="border: 1px solid blue; width: 30%;">
-          <h3>Comment </h3>
-          <br>
-          <table class="table table-hover">
-            <tbody>
-              <% @comments.each do |comment| %>
-                  <tr>
-
-                      <td><%= comment.content %></td>
-
-                  </tr>
-                  <% end %>
-            </tbody>
-          </table>
+<div class="container" >
+  <h3 class="text-center">Comment </h3>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>回覆內容</th>
+        <th>Comment's Photo</th>
+        <th>Comment's creator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.content %></td>
+          <td>
+          <% if comment.photo.present? %>
+            <%= image_tag(comment.photo.image.thumb.url, class: "thumbnail") %>
+          <% else %>
+            <%= image_tag("http://placehold.it/25x25&text=No Pic", class:"thumbnail") %>
+          <% end %>
+          </td>
+          <td>
+            <% if comment.user.present? %>
+              <%= comment.user.email %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
           <%= simple_form_for @comment, url: comment_topic_path do |f| %>
             <div class="form-group">
-              <%= f.input :content , input_html:{class: "form-control"} %>
+              <%= f.input :content , placeholder: '回覆評論',input_html:{class: "form-control"} %>
+              <%= f.simple_fields_for :photo do |c| %>
+                <%= c.input :image,label: '回覆上傳照片', as: :file %>
+              <% end %>
             </div>
             <%= f.submit "發表評論", class: "btn btn-primary", data: {disable_with: "Submitting....."} %>
           <% end %>
 
-  </div>
+
 </div>
 
 <div class="text-center">

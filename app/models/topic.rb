@@ -5,6 +5,10 @@ class Topic < ActiveRecord::Base
   has_many :liked_users, through: :likes, source: :user
   has_many :topic_categoryships
   has_many :categories, through: :topic_categoryships
+  has_one :photo
+  accepts_nested_attributes_for :photo
+  # has_one :topicphoto
+  # accepts_nested_attributes_for :topicphoto
 
   def find_like(user)
     Like.where(topic_id: self.id, user_id: user.id).first

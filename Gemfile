@@ -36,8 +36,9 @@ gem 'devise'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'omniauth-facebook'
-
 gem 'settingslogic'
+gem 'carrierwave'
+gem 'mini_magick'
 
 
 group :development, :test do
