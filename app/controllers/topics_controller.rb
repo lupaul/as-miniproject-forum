@@ -185,10 +185,14 @@ class TopicsController < ApplicationController
     else
       flash[:alert] = "無法取消！！"
     end
-    redirect_to topic_path(@topic)
+    if params[:topic]
+      redirect_to :back
+    else
+      redirect_to topic_path(@topic)
+    end
   end
 
-  
+
 
   private
 

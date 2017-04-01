@@ -9,10 +9,11 @@
         <h4>文章名稱：</h4>
         <h3><%= link_to(topic.name, topic_path(topic)) %></h3>
         <br>
-        <p>
-
-        </p>
       </div>
+      <div class= "btn btn-warning pull-right">
+      <%= link_to("取消收藏",unstore_topic_path(topic,topic: topic),method: :post) %>
+      </div>
+      <br><br>
     </div>
   </div>
   <% end %>

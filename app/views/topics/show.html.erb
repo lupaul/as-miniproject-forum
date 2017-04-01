@@ -11,6 +11,8 @@
         <th>Photo</th>
         <th>Creator</th>
         <th>瀏覽人數</th>
+        <th>誰收藏</th>
+        <th>參與討論人員</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +25,22 @@
             <% end %>
             </td>
             <td><%= @topic.user.email %></td>
-            <td><%= @topic.viewcount %></td>
+            <td><%=  @topic.viewcount %></td>
+            <td>
+              <% if @topic.stored_users.present? %>
+                <% @topic.stored_users.each do |user| %>
+                    <%= user.display_name %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% @topic.comments.each do |comment| %>
+                <% if comment.user.present? %>
+                    <%= comment.user.display_name %>
+                <% end %>
+              <% end %>
+            </td>
+
           </tr>
     </tbody>
   </table>
@@ -74,7 +91,7 @@
       <%= f.simple_fields_for :photo do |c| %>
         <%= c.input :image,label: '回覆上傳照片', as: :file %>
       <% end %>
-    
+
     </div>
     <%= f.submit "發表評論", class: "btn btn-primary", data: {disable_with: "Submitting....."} %>
   <% end %>
