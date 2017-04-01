@@ -34,10 +34,8 @@
               <% end %>
             </td>
             <td>
-              <% @topic.comments.each do |comment| %>
-                <% if comment.user.present? %>
-                    <%= comment.user.display_name %>
-                <% end %>
+              <% @comment_member.each do |member| %>
+                <%= User.find(member).display_name %> <br>  
               <% end %>
             </td>
 

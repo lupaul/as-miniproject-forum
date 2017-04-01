@@ -48,6 +48,7 @@ class TopicsController < ApplicationController
     @viewcount = @topic.viewcount
     @viewcount += 1
     @topic.update(viewcount: @viewcount)
+    @comment_member = @topic.comments.pluck(:user_id).uniq
     @comments = @topic.comments
     if params[:comment_id]
       @comment = Comment.find(params[:comment_id])
