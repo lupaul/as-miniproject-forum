@@ -2,7 +2,7 @@
   <% if current_user && !current_user.is_store_of?(@topic) %>
       <%= link_to("收藏本篇文章", store_topic_path(@topic), method: :post, class: "btn btn-success pull-right") %>
   <% else %>
-      <%= link_to("移除收藏文章", store_topic_path(@topic), method: :post, class: "btn btn-warning pull-right") %>
+      <%= link_to("移除收藏文章", unstore_topic_path(@topic), method: :post, class: "btn btn-warning pull-right") %>
   <% end %>
   <table class="table table-hover">
     <thead>
