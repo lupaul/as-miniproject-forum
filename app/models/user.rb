@@ -11,9 +11,23 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :liked_topics, through: :likes, source: :topic
   has_many :photos
+  has_many :store_topicships
+  has_many :store_topics, through: :store_topicships, source: :topic
 
-  def dispaly_name
+  def display_name
     email.split("@").first
+  end
+
+  def store!(topic)
+    store_topics << topic
+  end
+
+  def unstore!(topic)
+    store_topics.delete(topic)
+  end
+
+  def is_store_of?(topic)
+    store_topics.include?(topic)
   end
 
   def self.from_omniauth(auth)

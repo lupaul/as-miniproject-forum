@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       post :unlike
       post :comment
       post :del_comment
+      post :store
+      post :unstore
     end
 
   end

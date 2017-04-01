@@ -166,6 +166,28 @@ class TopicsController < ApplicationController
 
   end
 
+  def store
+    @topic = Topic.find(params[:id])
+    if !current_user.is_store_of?(@topic)
+      current_user.store!(@topic)
+      flash[:notice] = "收藏成功！！"
+    else
+      flash[:alert] = "U already store!!"
+    end
+    redirect_to topic_path(@topic)
+  end
+
+  def unstore
+    @topic = Topic.find(params[:id])
+    if current_user.is_store_of?(@topic)
+      current_user.unstore!(@topic)
+      flash[:warning] = "已取消收藏！！"
+    else
+      flash[:alert] = "無法取消！！"
+    end
+    redirect_to topic_path(@topic)
+  end
+
 
   private
 

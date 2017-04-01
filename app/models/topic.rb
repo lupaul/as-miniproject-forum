@@ -7,6 +7,8 @@ class Topic < ActiveRecord::Base
   has_many :categories, through: :topic_categoryships
   has_one :photo, dependent: :destroy
   accepts_nested_attributes_for :photo
+  has_many :store_topicships
+  has_many :stored_users, through: :store_topicships, source: :user
   # has_one :topicphoto
   # accepts_nested_attributes_for :topicphoto
 
