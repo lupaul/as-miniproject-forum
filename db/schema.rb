@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330085124) do
+ActiveRecord::Schema.define(version: 20170401031258) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20170330085124) do
     t.datetime "updated_at",                 null: false
     t.datetime "last_time"
     t.integer  "comments_count", default: 0
+    t.integer  "viewcount",      default: 0
   end
 
   create_table "users", force: :cascade do |t|

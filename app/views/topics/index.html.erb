@@ -20,13 +20,14 @@
         <th>#</th>
         <th>分類</th>
         <th>Topic名稱</th>
+        <th><%= link_to("Topic瀏覽人數", topics_path(view: :count), class: "btn btn-info ") %></th> 
         <th>Creator</th>
         <th>Topic發表時間</th>
         <th>Comment數量</th>
         <th>最後comment時間</th>
         <th>按讚人數</th>
         <th>Who likes</th>
-        <th>讚鈕</th>
+        <th>Like/Unlike</th>
 
       </tr>
     </thead>

@@ -5,6 +5,7 @@
       <% end %>
     </td>
     <td><%= link_to topic.name,topic_path(topic) %></td>
+    <td><%= topic.viewcount %></td>
     <td><%= topic.user.email %></td>
     <td><%= topic.created_at  %></td>
     <td><%= topic.comments_count %></td>

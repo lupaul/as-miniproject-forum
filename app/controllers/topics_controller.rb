@@ -17,6 +17,8 @@ class TopicsController < ApplicationController
       @topics = Topic.order("comments_count DESC").paginate(page: params[:page], per_page: 5)
     elsif category
       @topics = category.members.order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    elsif params[:view]
+      @topics = Topic.order("viewcount DESC").paginate(page: params[:page],per_page: 5)
     else
       @topics = Topic.paginate(page: params[:page], per_page: 5)
     end
@@ -43,6 +45,9 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @viewcount = @topic.viewcount
+    @viewcount += 1
+    @topic.update(viewcount: @viewcount)
     @comments = @topic.comments
     if params[:comment_id]
       @comment = Comment.find(params[:comment_id])

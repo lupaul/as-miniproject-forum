@@ -5,6 +5,7 @@
         <th>名稱</th>
         <th>Photo</th>
         <th>Creator</th>
+        <th>瀏覽人數</th>
       </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
             <% end %>
             </td>
             <td><%= @topic.user.email %></td>
+            <td><%= @topic.viewcount %></td>
           </tr>
     </tbody>
   </table>
