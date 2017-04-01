@@ -33,6 +33,10 @@ class UsersController < ApplicationController
     @topics = current_user.liked_topics
   end
 
+  def stored_topics
+    @topics = current_user.store_topics
+  end
+
   private
 
   def content_params

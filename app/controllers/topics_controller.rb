@@ -188,6 +188,7 @@ class TopicsController < ApplicationController
     redirect_to topic_path(@topic)
   end
 
+  
 
   private
 

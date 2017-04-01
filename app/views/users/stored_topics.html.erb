@@ -1,0 +1,19 @@
+<div class="row">
+  <% @topics.each do |topic| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="text-right">
+        <h4>瀏覽人數：<%= topic.viewcount %></h4>
+      </div>
+      <div class="caption text-center">
+        <h4>文章名稱：</h4>
+        <h3><%= link_to(topic.name, topic_path(topic)) %></h3>
+        <br>
+        <p>
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

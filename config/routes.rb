@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         get :post_topics
         get :post_comments
         get :like_topics
+        get :stored_topics
       end
     end
 
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       get :about
       get :last_time
       get :comment_count
+
     end
 
     member do
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
       post :del_comment
       post :store
       post :unstore
+
     end
 
   end
