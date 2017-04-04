@@ -37,6 +37,10 @@ class UsersController < ApplicationController
     @topics = current_user.store_topics
   end
 
+  def admin
+    @user = User.all
+  end
+
   private
 
   def content_params

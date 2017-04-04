@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <h3 class="text-center">Admin 管理後台</h3>
+  <thead>
+    <tr>
+      <th> 使用者列表</th>
+      <th>  Email</th>
+      <th> Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to("Edit", edit_user_registration_path) %></td>
+    </tr>
+    <% end %>
+
+  </table>
+</div>

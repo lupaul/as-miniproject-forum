@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>後台！</title>
+    <title>個人資訊後台！</title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -21,6 +21,7 @@
               <li>  <%= link_to("所有張貼回覆", post_comments_users_path) %></li>
               <li><%= link_to("按讚文章", like_topics_users_path) %></li>
               <li><%= link_to("收藏文章",stored_topics_users_path) %></li>
+              <li><%= link_to("Admin後台",admin_users_path) %></li>
               <li>
                 <%= link_to("返回Topic", topics_path) %>
               </li>

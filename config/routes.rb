@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get :post_comments
         get :like_topics
         get :stored_topics
+        get :admin
       end
     end
 
