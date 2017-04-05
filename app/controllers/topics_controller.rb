@@ -35,7 +35,17 @@ class TopicsController < ApplicationController
     # @topic = Topic.new(topic_params)
     # @topic.user = current_user
     @topic = current_user.topics.new(topic_params)
+    find_id = params["topic"]["category_ids"]
+
     if @topic.save
+      byebug
+      find_id.each do |id|
+        if id.present?
+          updatecount = Category.find(id).count += 1
+          Category.find(id).update(count: updatecount)
+        end
+
+      end
       flash[:notice] = "Success create!!"
       redirect_to topics_path
     else

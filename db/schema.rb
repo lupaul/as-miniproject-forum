@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404071552) do
+ActiveRecord::Schema.define(version: 20170405061734) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
     t.integer  "topic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "count",      default: 0
   end
 
   create_table "comments", force: :cascade do |t|
@@ -48,6 +49,14 @@ ActiveRecord::Schema.define(version: 20170404071552) do
 
   add_index "likes", ["topic_id"], name: "index_likes_on_topic_id"
   add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "members", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "admin"
+    t.integer  "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"

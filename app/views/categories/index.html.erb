@@ -18,7 +18,7 @@
       <td>
         <%= category.title%>
       </td>
-      <td> time</td>
+      <td><%= category.count %></td>
       <td><%= link_to("Edit","#",class: "btn btn-info") %></td>
       <td><%= link_to("Delete", "#", method: :delete, data:{confirm: "Are U sure!!?"}, class: "btn btn-warning") %></td>
     </tr>

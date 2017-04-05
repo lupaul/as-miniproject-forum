@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
   root "topics#index"
+  get '/test',to: "topics#test"
 
   namespace :admin do
     resources :users do
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories 
+  resources :categories
 
   resources :topics do
     collection do
