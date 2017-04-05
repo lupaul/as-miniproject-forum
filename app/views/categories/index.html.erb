@@ -1,0 +1,27 @@
+<%= link_to("新建分類","#",class: "btn btn-warning pull-right" )%><br><br>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>分類名稱</th>
+      <th>被使用次數</th>
+      <th>編輯</th>
+      <th>是否刪除</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @categories.each do |category| %>
+    <tr>
+      <td>
+        <%= category.id %>
+      </td>
+      <td>
+        <%= category.title%>
+      </td>
+      <td> time</td>
+      <td><%= link_to("Edit","#",class: "btn btn-info") %></td>
+      <td><%= link_to("Delete", "#", method: :delete, data:{confirm: "Are U sure!!?"}, class: "btn btn-warning") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

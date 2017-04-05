@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
   def admin_required
     authenticate_user!
     unless  current_user.admin?
-      flash[:alert] = "You are not authorized to access this resource!XDD"
+      flash[:alert] = "你沒有權限進入！！!XDD"
       redirect_to root_path
     end
   end
 
-  
+
 
 
   protected

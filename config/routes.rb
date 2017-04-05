@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :categories 
 
   resources :topics do
     collection do

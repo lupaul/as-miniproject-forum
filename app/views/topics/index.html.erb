@@ -9,6 +9,7 @@
 <%= link_to("(最新文章)排序",topics_path(new: :time),class: 'btn btn-success') %>
 <%= link_to("最後回覆時間排序",topics_path(last: :time),class: 'btn btn-success') %>
 <%= link_to("最多回覆數排序",topics_path(max: :count), class: "btn btn-info") %>
+<%= link_to("分類管理",categories_path,class: "btn btn-info") %>
 <%= link_to("Create",new_topic_path,class:"btn btn-warning ") %>
 <br><br><br>
 <h3>數量：<span id='topics-count'> <%= Topic.count %> </span></h3>
@@ -20,7 +21,7 @@
         <th>#</th>
         <th>分類</th>
         <th>Topic名稱</th>
-        <th><%= link_to("Topic瀏覽人數", topics_path(view: :count), class: "btn btn-info ") %></th> 
+        <th><%= link_to("Topic瀏覽人數", topics_path(view: :count), class: "btn btn-info ") %></th>
         <th>Creator</th>
         <th>Topic發表時間</th>
         <th>Comment數量</th>
