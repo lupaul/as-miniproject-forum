@@ -18,9 +18,12 @@
     <td id="topic-like-btn-<%= topic.id %>">
       <%= render partial: "likebutton", locals: {topic: topic} %>
     </td>
-    <% if current_user && current_user == topic.user %>
+    <% if current_user %>
+      <% if  current_user == topic.user  || current_user.admin?  %>
       <td><%= link_to("Edit",edit_topic_path(topic), class: "btn btn-info") %></td>
       <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning",remote: true) %></td>
       <!-- <td><%= link_to("Delete",topic_path(topic),method: :delete, data:{confirm: "Are U sure??"}, class: "btn btn-warning") %></td> -->
     <% end %>
+  <% end %>
+
 </tr>

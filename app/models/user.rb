@@ -30,6 +30,18 @@ class User < ActiveRecord::Base
     store_topics.include?(topic)
   end
 
+  def admin?
+    is_admin
+  end
+
+  def to_admin
+    self.update_columns(is_admin: true)
+  end
+
+  def to_normal
+    self.update_columns(is_admin: false)
+  end
+
   def self.from_omniauth(auth)
    # Case 1: Find existing user by facebook uid
    user = User.find_by_fb_uid( auth.uid )

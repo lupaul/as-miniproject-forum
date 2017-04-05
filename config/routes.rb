@@ -1,21 +1,30 @@
 Rails.application.routes.draw do
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
 
 
   root "topics#index"
 
-
+  namespace :admin do
     resources :users do
-      collection do
-        get :profile
-        put :edit_profile
-        get :post_topics
-        get :post_comments
-        get :like_topics
-        get :stored_topics
-        get :admin
+      member do
+        post :to_admin
+        post :to_normal
       end
     end
+  end
+
+  resources :users do
+    collection do
+      get :profile
+      put :edit_profile
+      get :post_topics
+      get :post_comments
+      get :like_topics
+      get :stored_topics
+
+    end
+  end
 
 
   resources :topics do
