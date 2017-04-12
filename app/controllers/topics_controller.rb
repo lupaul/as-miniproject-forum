@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
     find_id = params["topic"]["category_ids"]
 
     if @topic.save
-      byebug
+      
       find_id.each do |id|
         if id.present?
           updatecount = Category.find(id).count += 1
