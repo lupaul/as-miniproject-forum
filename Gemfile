@@ -39,6 +39,7 @@ gem 'omniauth-facebook'
 gem 'settingslogic'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'figaro'
 
 group :production do
   gem 'pg'
