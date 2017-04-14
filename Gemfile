@@ -40,6 +40,8 @@ gem 'omniauth-facebook'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'figaro'
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
 
 group :production do
   # gem 'pg'

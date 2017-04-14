@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    airbrussh (1.1.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.4)
     autoprefixer-rails (6.7.7.1)
       execjs
@@ -45,6 +47,19 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    capistrano (3.8.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-passenger (0.2.0)
+      capistrano (~> 3.0)
+    capistrano-rails (1.2.3)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
     carrierwave (1.0.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -98,6 +113,9 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.3.21)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.1.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     oauth2 (1.3.1)
@@ -187,6 +205,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    sshkit (1.13.1)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -210,6 +231,8 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  capistrano-passenger
+  capistrano-rails
   carrierwave
   coffee-rails (~> 4.1.0)
   devise
