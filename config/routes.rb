@@ -2,10 +2,20 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
 
-  scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+  # namespace :api, path: "", constraints: ApiDomain.new do
+  #   namespace :v1 do
+  #     resources :users, only: [:index]
+  #   end
+  # end
+
+
+  #scope path: "/api/v1/"
+  scope path:'/api/v1/',constraints: ApiDomain.new, :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
   resources :topics
-end
-  root "topics#index"
+  end
+
+
+    root "topics#index"
   get '/test',to: "topics#test"
 
   namespace :admin do

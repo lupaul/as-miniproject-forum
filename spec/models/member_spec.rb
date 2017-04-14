@@ -24,9 +24,9 @@ RSpec.describe Member, type: :model do
   #response.public_methods(false)
   #加false 可以找出自己的class底下的方法
 
-  expect{
-    post "/test",params:{ member:{ name: "tt"}}
-  }.to change{Member.count}.by(1)
+  # expect{
+  #   post "/test",params:{ member:{ name: "tt"}}
+  # }.to change{Member.count}.by(1)
 
   it "+" do
     puts "1"
