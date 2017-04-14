@@ -40,13 +40,19 @@ gem 'omniauth-facebook'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'figaro'
-gem 'capistrano-rails', :group => :development
-gem 'capistrano-passenger', :group => :development
+# gem 'capistrano-rails', :group => :development
+# gem 'capistrano-passenger', :group => :development
+
+group :development do
+   gem "capistrano", "~> 3.4"
+   gem "capistrano-rvm"
+   gem "capistrano-rails"
+ end
 
 group :production do
   # gem 'pg'
   # gem 'rails_12factor'
-  
+
   gem 'mysql2', '~> 0.3.18'
 end
 
