@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock "3.8.0"
 
-
+`ssh-add` # 注意這是鍵盤左上角的「 `」不是單引號「 '」
 
 
 set :application, 'alphastudy'
@@ -13,6 +13,17 @@ set :repo_url, "git@github.com:lupaul/as-miniproject-forum.git"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/pochia/as-miniproject-forum"
+
+
+
+set :keep_releases, 5
+
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
+# 如果有 facebook.yml 或 email.yml 想要連結的話，也要加進來
+
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
+
+set :passenger_restart_with_touch, true
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
