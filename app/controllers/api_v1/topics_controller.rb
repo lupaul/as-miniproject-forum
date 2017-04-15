@@ -3,10 +3,12 @@ class ApiV1::TopicsController <  ApiController
   # GET http://localhost:3000/api/v1/topics.json
   def index
     @topics = Topic.all
-    
+
     @header = request.headers.to_h["HTTP_TEST"]
     # render json: @topics.to_json
-    render json: {message: "#{@header}"}
+    
+    #測試header
+    # render json: {message: "#{@header}"}
   end
 
   #GET http://localhost:3000/api/v1/topics/21.json
