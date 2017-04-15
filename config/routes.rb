@@ -10,7 +10,12 @@ Rails.application.routes.draw do
 
 
   #scope path: "/api/v1/"
-  scope path:'/api/v1/',constraints: ApiDomain.new, :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+  # scope path:'/api/v1/',constraints: ApiDomain.new, :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+  # resources :topics
+  # end
+
+  #原先domain的api
+  scope path:'/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
   resources :topics
   end
 
